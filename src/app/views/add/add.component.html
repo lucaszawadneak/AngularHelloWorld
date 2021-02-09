@@ -1,0 +1,56 @@
+<div id="container">
+  <span>
+    <i class="material-icons">theaters</i>
+    <h1>Adicionar filme</h1>
+  </span>
+  <div id="add-box">
+    <form>
+      <mat-form-field>
+        <mat-label>Título</mat-label>
+        <input
+          matInput
+          placeholder="Ex. Ilha do Medo"
+          [(ngModel)]="title"
+          name="title"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Ano</mat-label>
+        <input
+          matInput
+          placeholder="Ex. 2010"
+          type="number"
+          [(ngModel)]="year"
+          name="year"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Diretor</mat-label>
+        <input
+          matInput
+          placeholder="Ex. Martin Scorsese"
+          [(ngModel)]="director"
+          name="director"
+        />
+      </mat-form-field>
+      <mat-label>Nota ({{ rating }})</mat-label>
+      <input
+        type="range"
+        id="vol"
+        name="vol"
+        min="0"
+        max="100"
+        [(ngModel)]="rating"
+        name="rating"
+      />
+      <button
+        mat-flat-button
+        color="accent"
+        class="add-button"
+        (click)="handleRegisterMovie()"
+      >
+        Adicionar
+      </button>
+    </form>
+  </div>
+</div>
