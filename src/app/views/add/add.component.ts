@@ -10,7 +10,7 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  rating: number = 0;
+  rating: number = -1;
   title: string = "";
   year: number = 0;
   director: string = "";
@@ -19,7 +19,7 @@ export class AddComponent implements OnInit {
   handleRegisterMovie(): void {
     console.log("filme adicionado");
 
-    this.rating = 0;
+    this.rating = -1;
     this.title = "";
     this.year = 0;
     this.director = "";

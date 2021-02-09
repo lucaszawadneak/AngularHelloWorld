@@ -7,13 +7,17 @@
   align-items: center;
 }
 
-#container > h1 {
+#container h1 {
   margin: 0px;
   font-weight: bold;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
   margin-left: 20px;
   color: #f0f0f0;
+}
+
+#container a {
+  text-decoration: none;
 }
 
 .title {
@@ -23,7 +27,7 @@
 
 .title > i {
   margin-left: 50px;
-  font-size: 18px;
+  font-size: 21px;
   color: #fff;
 }
 
@@ -32,4 +36,5 @@
   margin-left: 5px;
   text-align: center;
   color: #fff;
+  font-size: 18px;
 }

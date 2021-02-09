@@ -43,11 +43,11 @@
         />
       </mat-form-field>
       <mat-form-field>
-        <select matNativeControl>
-          <option>Gostei</option>
-          <option>Odiei</option>
-          <option>Não entendi nada</option>
-        </select>
+        <mat-select placeholder="Sua avaliação do filme!" [(ngModel)]="rating">
+          <mat-option value="0">Gostei</mat-option>
+          <mat-option value="1">Odiei</mat-option>
+          <mat-option value="2">Não entendi nada</mat-option>
+        </mat-select>
       </mat-form-field>
       <button
         mat-flat-button
