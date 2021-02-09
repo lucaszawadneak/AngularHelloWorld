@@ -1,0 +1,27 @@
+#container {
+  display: flex;
+  padding: 5px;
+  background-color: #f0f0f0;
+  align-items: center;
+  position: absolute;
+  justify-content: flex-end;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+#container > span {
+  display: flex;
+  align-items: center;
+}
+
+#container > span > i {
+  font-size: 18px;
+  margin-right: 5px;
+  color: red;
+}
+
+#container p {
+  margin: 0px;
+  margin-right: 20px;
+}
