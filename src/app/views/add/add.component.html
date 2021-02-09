@@ -33,16 +33,22 @@
           name="director"
         />
       </mat-form-field>
-      <mat-label>Nota ({{ rating }})</mat-label>
-      <input
-        type="range"
-        id="vol"
-        name="vol"
-        min="0"
-        max="100"
-        [(ngModel)]="rating"
-        name="rating"
-      />
+      <mat-form-field>
+        <mat-label>Orçamento</mat-label>
+        <input
+          matInput
+          placeholder="Ex. Martin Scorsese"
+          [(ngModel)]="shootingPrice"
+          name="shootingPrice"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <select matNativeControl>
+          <option>Gostei</option>
+          <option>Odiei</option>
+          <option>Não entendi nada</option>
+        </select>
+      </mat-form-field>
       <button
         mat-flat-button
         color="accent"

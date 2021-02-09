@@ -11,9 +11,10 @@ export class AddComponent implements OnInit {
   ngOnInit(): void {}
 
   rating: number = 0;
-  title: string = "test";
+  title: string = "";
   year: number = 0;
   director: string = "";
+  shootingPrice: number = 0;
 
   handleRegisterMovie(): void {
     console.log("filme adicionado");
