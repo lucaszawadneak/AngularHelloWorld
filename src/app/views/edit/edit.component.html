@@ -1,0 +1,83 @@
+<div id="container">
+  <span *ngIf="!selected; else movieName">
+    <i class="material-icons">theaters</i>
+    <h1>Editar filme</h1>
+  </span>
+  <ng-template #movieName>
+    <span>
+      <i class="material-icons">theaters</i>
+      <h1>Star Wars</h1>
+    </span>
+  </ng-template>
+  <div id="add-box">
+    <div *ngIf="!selected; else form">
+      <mat-select placeholder="Qual filme editar?" [(ngModel)]="rating">
+        <mat-option value="0">Star Wars (1977)</mat-option>
+        <mat-option value="1">Ilha do Medo (2010)</mat-option>
+        <mat-option value="2">Green Mile (2008)</mat-option>
+      </mat-select>
+    </div>
+    <ng-template #form>
+      <form>
+        <mat-form-field>
+          <mat-label>Título</mat-label>
+          <input
+            matInput
+            placeholder="Ex. Ilha do Medo"
+            [(ngModel)]="title"
+            name="title"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Ano</mat-label>
+          <input
+            matInput
+            placeholder="Ex. 2010"
+            type="number"
+            [(ngModel)]="year"
+            name="year"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Diretor</mat-label>
+          <input
+            matInput
+            placeholder="Ex. Martin Scorsese"
+            [(ngModel)]="director"
+            name="director"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Orçamento</mat-label>
+          <input
+            matInput
+            placeholder="Ex. Martin Scorsese"
+            [(ngModel)]="shootingPrice"
+            name="shootingPrice"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select
+            placeholder="Sua avaliação do filme!"
+            [(ngModel)]="rating"
+          >
+            <mat-option value="0">Gostei</mat-option>
+            <mat-option value="1">Odiei</mat-option>
+            <mat-option value="2">Não entendi nada</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button
+          mat-flat-button
+          color="accent"
+          class="add-button"
+          (click)="handleRegisterMovie()"
+        >
+          <span>
+            <i class="material-icons">edit</i>
+            Editar
+          </span>
+        </button>
+      </form>
+    </ng-template>
+  </div>
+</div>
