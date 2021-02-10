@@ -9,7 +9,7 @@ import { Movie } from "src/app/interfaces";
 export class ListComponent implements OnInit {
   constructor() {}
 
-  @Input() movies: Movie[] | [];
+  @Input() movies: Movie[];
   @Input() onDelete: Function;
 
   ngOnInit(): void {}

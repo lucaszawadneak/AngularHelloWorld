@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
+import { Movie } from "src/app/interfaces";
 
 @Component({
   selector: "app-add",
@@ -8,6 +9,8 @@ import { Component, Input, OnInit } from "@angular/core";
 export class AddComponent implements OnInit {
   constructor() {}
 
+  @Output() pushMovie = new EventEmitter<Movie>();
+
   ngOnInit(): void {}
 
   rating: number = -1;
@@ -16,8 +19,6 @@ export class AddComponent implements OnInit {
   director: string = "";
   shootingPrice: number = 0;
 
-  @Input() pushMovie: Function;
-
   handleRegisterMovie(): void {
     let movieObject = {
       rating: this.rating,
@@ -25,9 +26,10 @@ export class AddComponent implements OnInit {
       year: this.year,
       director: this.director,
       shootingPrice: this.shootingPrice,
+      id: new Date().getTime(),
     };
 
-    this.pushMovie(movieObject);
+    this.pushMovie.emit(movieObject);
 
     this.rating = -1;
     this.title = "";
