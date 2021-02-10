@@ -17,6 +17,11 @@ export class AppComponent {
     },
   ];
 
+  handlePushMovie(movie: Movie): void {
+    console.log(`Adicionando ${movie.title} a lista!`);
+    this.movies.push(movie);
+  }
+
   handleDeleteMovie(index): void {
     this.movies.splice(index, 1);
     console.log(`Deleted movie with index ${index}`);

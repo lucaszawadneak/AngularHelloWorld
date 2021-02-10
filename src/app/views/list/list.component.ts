@@ -17,4 +17,8 @@ export class ListComponent implements OnInit {
   handleEdit(id) {
     console.log(`Editing movie with id ${id}`);
   }
+
+  handleDelete(index) {
+    this.onDelete(index);
+  }
 }

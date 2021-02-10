@@ -16,8 +16,18 @@ export class AddComponent implements OnInit {
   director: string = "";
   shootingPrice: number = 0;
 
+  @Input() pushMovie: Function;
+
   handleRegisterMovie(): void {
-    console.log("filme adicionado");
+    let movieObject = {
+      rating: this.rating,
+      title: this.title,
+      year: this.year,
+      director: this.director,
+      shootingPrice: this.shootingPrice,
+    };
+
+    this.pushMovie(movieObject);
 
     this.rating = -1;
     this.title = "";
