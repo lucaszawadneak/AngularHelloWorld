@@ -11,14 +11,15 @@ import { MatInputModule } from "@angular/material/input";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
 import { MatSelectModule } from "@angular/material/select";
+import { MatCardModule } from "@angular/material/card";
 
 import { FooterComponent } from "./components/template/footer/footer.component";
 import { NavComponent } from "./components/template/nav/nav.component";
+import { HeaderComponent } from "./components/template/header/header.component";
 import { AddComponent } from "./views/add/add.component";
 import { ListComponent } from "./views/list/list.component";
-import { HeaderComponent } from "./components/template/header/header.component";
-import { HomeComponent } from './views/home/home.component';
-
+import { HomeComponent } from "./views/home/home.component";
+import { EditComponent } from "./views/edit/edit.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +29,7 @@ import { HomeComponent } from './views/home/home.component';
     ListComponent,
     AddComponent,
     HomeComponent,
+    EditComponent,
   ],
   imports: [
     FormsModule,
@@ -39,6 +41,7 @@ import { HomeComponent } from './views/home/home.component';
     MatListModule,
     MatInputModule,
     MatSelectModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,1 +1,17 @@
-<h1>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</h1>
+<div id="container">
+  <mat-card class="card-limits">
+    <mat-card-header>
+      <img mat-card-avatar class="example-header-image" [src]="avatarUrl" />
+      <mat-card-title>Bem vindo!</mat-card-title>
+      <mat-card-subtitle>
+        Sinta-se livre para adicionar um filme.
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="moviePosterUrl" alt="Photo of a Shiba Inu" />
+    <mat-card-content>
+      <p>
+        {{ starWarsDescription }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
