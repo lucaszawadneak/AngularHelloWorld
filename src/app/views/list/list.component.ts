@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
+import { Movie } from "src/app/interfaces";
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  selector: "app-list",
+  templateUrl: "./list.component.html",
+  styleUrls: ["./list.component.css"],
 })
 export class ListComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  @Input() movies: Movie[] | [];
+  @Input() onDelete: Function;
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  handleEdit(id) {
+    console.log(`Editing movie with id ${id}`);
   }
-
 }

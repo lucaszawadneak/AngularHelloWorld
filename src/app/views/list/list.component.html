@@ -1,15 +1,19 @@
 <div id="container">
   <h1>Filmes</h1>
   <div class="movie-holder">
-    <div class="movie-box">
+    <div class="movie-box" *ngFor="let movie of movies; let index = index">
       <div>
-        <strong>Ilha do Medo (2010)</strong>
-        <p>Martin Scorcese</p>
-        <h2>99</h2>
+        <strong>{{ movie.title }} ({{ movie.year }})</strong>
+        <p>{{ movie.director }}</p>
+        <h2>{{ movie.rating }}</h2>
       </div>
       <div id="icon-box">
-        <button><i class="material-icons">edit</i></button>
-        <button><i class="material-icons">delete</i></button>
+        <button (click)="handleEdit(movie.id)">
+          <i class="material-icons">edit</i>
+        </button>
+        <button (click)="onDelete(index)">
+          <i class="material-icons">delete</i>
+        </button>
       </div>
     </div>
   </div>
