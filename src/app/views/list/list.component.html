@@ -5,7 +5,9 @@
       <div>
         <strong>{{ movie.title }} ({{ movie.year }})</strong>
         <p>{{ movie.director }}</p>
-        <h2>{{ movie.rating }}</h2>
+        <p>{{ movie.shootingPrice | money }}</p>
+        <p>Gostou?</p>
+        <h2>{{ movie.rating | rating }}</h2>
       </div>
       <div id="icon-box">
         <button (click)="handleEdit(movie.id)">

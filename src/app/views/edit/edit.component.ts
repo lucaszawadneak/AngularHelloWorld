@@ -1,5 +1,14 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { Movie } from "src/app/interfaces";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from "@angular/core";
+import { Observable, Observer, Subject } from "rxjs";
+import { EditObject, Movie } from "src/app/interfaces";
 
 @Component({
   selector: "app-edit",
@@ -9,10 +18,10 @@ import { Movie } from "src/app/interfaces";
 export class EditComponent implements OnInit {
   constructor() {}
 
-  @Input() movie: Movie;
+  //COLOCAR UM WATCH PARA QUE QUANDO VAR MUDAR, ASSINALAR NOVOS VALORES AOS CAMPOS DE MOVIE
+  @Input() selectedMovie: number = null;
   @Input() movieList: Movie[];
-
-  selected = false;
+  @Output() editMovie = new EventEmitter<EditObject>();
 
   rating: number = -1;
   title: string = "";
@@ -20,30 +29,49 @@ export class EditComponent implements OnInit {
   director: string = "";
   shootingPrice: number = 0;
 
-  //COLOCAR UM WATCH PARA QUE QUANDO VAR MUDAR, ASSINALAR NOVOS VALORES AOS CAMPOS ACIMA
-  selectedMovie: number = -1;
-
   handleAssingValues() {
-    this.rating = this.movie.rating;
-    this.title = this.movie.title;
-    this.year = this.movie.year;
-    this.director = this.movie.director;
-    this.shootingPrice = this.movie.shootingPrice;
+    let movie = this.movieList[this.selectedMovie];
+
+    console.log(movie);
+
+    this.rating = movie.rating;
+    this.title = movie.title;
+    this.year = movie.year;
+    this.director = movie.director;
+    this.shootingPrice = movie.shootingPrice;
   }
 
   ngOnInit(): void {
-    if (this.movie) {
-      this.selectedMovie = this.movie.id;
+    if (this.selectedMovie) {
       this.handleAssingValues();
     }
   }
 
-  handleRegisterMovie(): void {
-    console.log("filme adicionado");
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   console.log(changes.selectedMovie);
+  // }
+
+  // handleSelectMovie(a) {
+  //   console.log(a);
+  // }
+
+  handleEditMovie(): void {
+    let movieObject = {
+      rating: this.rating,
+      title: this.title,
+      year: this.year,
+      director: this.director,
+      shootingPrice: this.shootingPrice,
+      id: this.movieList[this.selectedMovie].id,
+    };
+
+    this.editMovie.emit({ movie: movieObject, index: this.selectedMovie });
+    console.log("Filme editado");
 
     this.rating = -1;
     this.title = "";
     this.year = 0;
     this.director = "";
+    this.selectedMovie = -1;
   }
 }

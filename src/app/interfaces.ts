@@ -6,3 +6,8 @@ export interface Movie {
   rating: number;
   id: number;
 }
+
+export interface EditObject {
+  movie: Movie;
+  index: number;
+}

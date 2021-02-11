@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Movie } from "./interfaces";
+import { Movie, EditObject } from "./interfaces";
 
 @Component({
   selector: "app-root",
@@ -22,8 +22,12 @@ export class AppComponent {
     this.movies.push(movie);
   }
 
-  handleDeleteMovie(index): void {
+  handleDeleteMovie(index: number): void {
     this.movies.splice(index, 1);
     console.log(`Deleted movie with index ${index}`);
+  }
+
+  handleEditMovie({ movie, index }: EditObject): void {
+    this.movies[index] = movie;
   }
 }

@@ -1,5 +1,5 @@
 <div id="container">
-  <span *ngIf="!(selectedMovie !== -1); else movieName">
+  <span *ngIf="selectedMovie == null; else movieName">
     <i class="material-icons">theaters</i>
     <h1>Editar filme</h1>
   </span>
@@ -10,8 +10,12 @@
     </span>
   </ng-template>
   <div id="add-box">
-    <div *ngIf="!(selectedMovie !== -1); else form">
-      <mat-select placeholder="Qual filme editar?" [(ngModel)]="selectedMovie">
+    <div *ngIf="selectedMovie == null; else form">
+      <mat-select
+        placeholder="Qual filme editar?"
+        [(ngModel)]="selectedMovie"
+        name="selectedMovie"
+      >
         <mat-option
           *ngFor="let item of movieList; let index = index"
           [value]="index"
@@ -19,6 +23,7 @@
           {{ item.title }} ({{ item.year }})
         </mat-option>
       </mat-select>
+      <h1>test</h1>
     </div>
     <ng-template #form>
       <form>
@@ -63,6 +68,7 @@
           <mat-select
             placeholder="Sua avaliação do filme!"
             [(ngModel)]="rating"
+            name="rating"
           >
             <mat-option value="0">Gostei</mat-option>
             <mat-option value="1">Odiei</mat-option>
@@ -73,7 +79,7 @@
           mat-flat-button
           color="accent"
           class="add-button"
-          (click)="handleRegisterMovie()"
+          (click)="handleEditMovie()"
         >
           <span>
             <i class="material-icons">edit</i>

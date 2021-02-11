@@ -20,6 +20,8 @@ import { AddComponent } from "./views/add/add.component";
 import { ListComponent } from "./views/list/list.component";
 import { HomeComponent } from "./views/home/home.component";
 import { EditComponent } from "./views/edit/edit.component";
+import { RatingPipe } from "./pipes/rating.pipe";
+import { MoneyPipe } from "./pipes/money.pipe";
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +32,8 @@ import { EditComponent } from "./views/edit/edit.component";
     AddComponent,
     HomeComponent,
     EditComponent,
+    RatingPipe,
+    MoneyPipe,
   ],
   imports: [
     FormsModule,
