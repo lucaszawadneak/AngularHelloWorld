@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import { Movie } from "src/app/interfaces";
 
 @Component({
@@ -15,9 +15,9 @@ export class AddComponent implements OnInit {
 
   rating: number = -1;
   title: string = "";
-  year: number = 0;
+  year: number = 2001;
   director: string = "";
-  shootingPrice: number = 0;
+  shootingPrice: number = 10000;
 
   handleRegisterMovie(): void {
     let movieObject = {
