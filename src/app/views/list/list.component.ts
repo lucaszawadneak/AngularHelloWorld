@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { Observable, Subject } from "rxjs";
+import { MoviesService } from "src/app/services/movies.service";
 import { Movie } from "../../interfaces";
 
 @Component({
@@ -7,18 +9,17 @@ import { Movie } from "../../interfaces";
   styleUrls: ["./list.component.css"],
 })
 export class ListComponent implements OnInit {
-  constructor() {}
+  constructor(private moviesService: MoviesService) {}
 
-  @Input() movies: Movie[];
-  @Input() onDelete: Function;
+  public movieList: Movie[] = [];
 
-  ngOnInit(): void {}
-
-  handleEdit(id) {
-    console.log(`Editing movie with id ${id}`);
+  ngOnInit(): void {
+    this.movieList = this.moviesService.getMovies();
   }
 
-  handleDelete(index) {
-    this.onDelete(index);
+  handleEdit(index: number): void {}
+
+  handleDelete(index: number): void {
+    this.moviesService.deleteMovie(index);
   }
 }

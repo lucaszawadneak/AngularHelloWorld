@@ -1,14 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from "@angular/core";
-import { Observable, Observer, Subject } from "rxjs";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { EditObject, Movie } from "src/app/interfaces";
+import { MoviesService } from "src/app/services/movies.service";
 
 @Component({
   selector: "app-edit",
@@ -16,13 +8,13 @@ import { EditObject, Movie } from "src/app/interfaces";
   styleUrls: ["./edit.component.css"],
 })
 export class EditComponent implements OnInit {
-  constructor() {}
+  constructor(private movieService: MoviesService) {}
 
   //COLOCAR UM WATCH PARA QUE QUANDO VAR MUDAR, ASSINALAR NOVOS VALORES AOS CAMPOS DE MOVIE
   @Input() selectedMovie: number = null;
-  @Input() movieList: Movie[];
   @Output() editMovie = new EventEmitter<EditObject>();
 
+  movieList: Movie[] = [];
   rating: number = -1;
   title: string = "";
   year: number = 0;
@@ -42,6 +34,7 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.movieList = this.movieService.getMovies();
     if (this.selectedMovie) {
       this.handleAssingValues();
     }

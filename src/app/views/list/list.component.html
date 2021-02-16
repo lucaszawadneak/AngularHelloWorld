@@ -8,7 +8,7 @@
       <th>Avaliação</th>
       <th></th>
     </tr>
-    <tr *ngFor="let movie of movies; let index = index">
+    <tr *ngFor="let movie of movieList; let index = index">
       <td>{{ movie.title }} ({{ movie.year }})</td>
       <td>{{ movie.director }}</td>
       <td>{{ movie.shootingPrice | money }}</td>
@@ -26,24 +26,3 @@
     </tr>
   </table>
 </div>
-
-<!-- <h1>Filmes</h1>
-<div class="movie-holder">
-  <div class="movie-box" *ngFor="let movie of movies; let index = index">
-    <div>
-      <strong>{{ movie.title }} ({{ movie.year }})</strong>
-      <p>{{ movie.director }}</p>
-      <p>{{ movie.shootingPrice | money }}</p>
-      <span>Gostou?</span>
-      <h2>{{ movie.rating | rating }}</h2>
-    </div>
-    <div id="icon-box">
-      <button (click)="handleEdit(movie.id)">
-        <i class="material-icons">edit</i>
-      </button>
-      <button (click)="handleDelete(index)">
-        <i class="material-icons">delete</i>
-      </button>
-    </div>
-  </div>
-</div> -->
