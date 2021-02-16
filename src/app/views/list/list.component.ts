@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { MoviesService } from "src/app/services/movies.service";
 import { Movie } from "../../interfaces";
@@ -14,9 +14,12 @@ export class ListComponent implements OnInit {
   public movieList: Movie[] = [];
 
   ngOnInit(): void {
-    this.movieList = this.moviesService.getMovies();
+    const movieObservable = this.moviesService.getMovies();
+    movieObservable.subscribe((data) => {
+      console.log(data);
+      this.movieList = data;
+    });
   }
-
   handleEdit(index: number): void {}
 
   handleDelete(index: number): void {

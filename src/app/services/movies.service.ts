@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
 import { Movie } from "../interfaces";
 
 @Injectable({
@@ -18,16 +19,22 @@ export class MoviesService {
     },
   ];
 
-  getMovies(): Movie[] {
-    return this.movies;
+  public movieWatcher: BehaviorSubject<Movie[]> = new BehaviorSubject(
+    this.movies
+  );
+
+  getMovies(): Observable<Movie[]> {
+    return this.movieWatcher.asObservable();
   }
 
   pushMovie(data: Movie): void {
     this.movies.push(data);
+    this.movieWatcher.next(this.movies);
   }
 
   deleteMovie(index: number): void {
     this.movies.splice(index, 1);
+    this.movieWatcher.next(this.movies);
   }
 
   editMovie(index: number, data: Movie): void {

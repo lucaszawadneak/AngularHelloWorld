@@ -34,7 +34,7 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.movieList = this.movieService.getMovies();
+    // this.movieList = this.movieService.getMovies();
     if (this.selectedMovie) {
       this.handleAssingValues();
     }
