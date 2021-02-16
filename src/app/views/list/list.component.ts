@@ -20,8 +20,6 @@ export class ListComponent implements OnInit {
       this.movieList = data;
     });
   }
-  handleEdit(index: number): void {}
-
   handleDelete(index: number): void {
     this.moviesService.deleteMovie(index);
   }

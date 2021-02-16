@@ -13,7 +13,8 @@
     <div *ngIf="selectedMovie == null; else form">
       <mat-select
         placeholder="Qual filme editar?"
-        [(ngModel)]="selectedMovie"
+        [value]="selectedMovie"
+        (selectionChange)="handleSelectMovie($event)"
         name="selectedMovie"
       >
         <mat-option

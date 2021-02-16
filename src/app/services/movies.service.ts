@@ -38,6 +38,7 @@ export class MoviesService {
   }
 
   editMovie(index: number, data: Movie): void {
+    console.log("Edit");
     this.movies[index] = data;
   }
 }

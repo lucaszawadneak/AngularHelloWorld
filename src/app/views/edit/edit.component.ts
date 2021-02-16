@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 import { EditObject, Movie } from "src/app/interfaces";
 import { MoviesService } from "src/app/services/movies.service";
 
@@ -8,11 +9,9 @@ import { MoviesService } from "src/app/services/movies.service";
   styleUrls: ["./edit.component.css"],
 })
 export class EditComponent implements OnInit {
-  constructor(private movieService: MoviesService) {}
+  constructor(private moviesService: MoviesService) {}
 
-  //COLOCAR UM WATCH PARA QUE QUANDO VAR MUDAR, ASSINALAR NOVOS VALORES AOS CAMPOS DE MOVIE
-  @Input() selectedMovie: number = null;
-  @Output() editMovie = new EventEmitter<EditObject>();
+  public selectedMovie: number = null;
 
   movieList: Movie[] = [];
   rating: number = -1;
@@ -20,23 +19,33 @@ export class EditComponent implements OnInit {
   year: number = 0;
   director: string = "";
   shootingPrice: number = 0;
-
-  handleAssingValues() {
-    let movie = this.movieList[this.selectedMovie];
-
-    console.log(movie);
-
-    this.rating = movie.rating;
-    this.title = movie.title;
-    this.year = movie.year;
-    this.director = movie.director;
-    this.shootingPrice = movie.shootingPrice;
-  }
+  id: number = -1;
 
   ngOnInit(): void {
-    // this.movieList = this.movieService.getMovies();
+    const movieObservable = this.moviesService.getMovies();
+    movieObservable.subscribe((data) => {
+      this.movieList = data;
+    });
     if (this.selectedMovie) {
-      this.handleAssingValues();
+      // this.handleAssingValues();
+    }
+  }
+
+  handleSelectMovie(event): void {
+    this.selectedMovie = event.value;
+    this.handleAssingValues(event.value);
+  }
+
+  handleAssingValues(selected: number) {
+    let movie = this.movieList[selected];
+
+    if (movie) {
+      this.title = movie.title;
+      this.year = movie.year;
+      this.director = movie.director;
+      this.shootingPrice = movie.shootingPrice;
+      this.rating = "Gostei" ? 0 : "Não gostei" ? 1 : 2;
+      this.id = movie.id;
     }
   }
 
@@ -58,13 +67,20 @@ export class EditComponent implements OnInit {
       id: this.movieList[this.selectedMovie].id,
     };
 
-    this.editMovie.emit({ movie: movieObject, index: this.selectedMovie });
-    console.log("Filme editado");
+    const findIndex = this.movieList.findIndex((item) => item.id === this.id);
 
-    this.rating = -1;
-    this.title = "";
-    this.year = 0;
-    this.director = "";
-    this.selectedMovie = -1;
+    console.log(findIndex);
+
+    if (findIndex >= 0) {
+      this.moviesService.editMovie(findIndex, movieObject);
+      console.log("Filme editado");
+
+      this.selectedMovie = null;
+      this.rating = -1;
+      this.title = "";
+      this.year = 0;
+      this.director = "";
+      this.selectedMovie = -1;
+    }
   }
 }
