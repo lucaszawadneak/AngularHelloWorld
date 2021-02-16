@@ -1,14 +1,12 @@
 <div id="container">
-  <span *ngIf="selectedMovie == null; else movieName">
+  <span *ngIf="selectedMovie == null">
     <i class="material-icons">theaters</i>
     <h1>Editar filme</h1>
   </span>
-  <ng-template #movieName>
-    <span>
-      <i class="material-icons">theaters</i>
-      <h1>{{ title }}</h1>
-    </span>
-  </ng-template>
+  <span *ngIf="selectedMovie !== null">
+    <i class="material-icons">theaters</i>
+    <h1>{{ title }}</h1>
+  </span>
   <div id="add-box">
     <div *ngIf="selectedMovie == null; else form">
       <mat-select

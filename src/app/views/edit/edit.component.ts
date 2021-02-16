@@ -49,13 +49,15 @@ export class EditComponent implements OnInit {
     }
   }
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   console.log(changes.selectedMovie);
-  // }
-
-  // handleSelectMovie(a) {
-  //   console.log(a);
-  // }
+  clearState(): void {
+    this.selectedMovie = null;
+    this.rating = -1;
+    this.title = "";
+    this.year = 2001;
+    this.director = "";
+    this.shootingPrice = 1000;
+    this.selectedMovie = -1;
+  }
 
   handleEditMovie(): void {
     let movieObject = {
@@ -74,13 +76,7 @@ export class EditComponent implements OnInit {
     if (findIndex >= 0) {
       this.moviesService.editMovie(findIndex, movieObject);
       console.log("Filme editado");
-
-      this.selectedMovie = null;
-      this.rating = -1;
-      this.title = "";
-      this.year = 0;
-      this.director = "";
-      this.selectedMovie = -1;
+      this.clearState();
     }
   }
 }
