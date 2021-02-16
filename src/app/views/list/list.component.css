@@ -56,3 +56,38 @@
 #icon-box button:hover {
   opacity: 0.5;
 }
+
+#container table {
+}
+
+#container tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#container tr:nth-child(odd) button {
+  background-color: #fff;
+}
+
+#container tr:nth-child(1) {
+  background-color: #304c89;
+  color: #fff;
+}
+
+td > div {
+  width: 30px;
+  display: flex;
+}
+
+td button {
+  border: 0px;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+td button:hover {
+  opacity: 0.4;
+}
+
+td i {
+  font-size: 16px;
+}
