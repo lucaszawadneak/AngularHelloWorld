@@ -22,8 +22,8 @@ export class EditComponent implements OnInit {
   id: number = -1;
 
   ngOnInit(): void {
-    const movieObservable = this.moviesService.getMovies();
-    movieObservable.subscribe((data) => {
+    const movieObservable$ = this.moviesService.getMovies();
+    movieObservable$.subscribe((data) => {
       this.movieList = data;
     });
     if (this.selectedMovie) {

@@ -14,8 +14,8 @@ export class ListComponent implements OnInit {
   public movieList: Movie[] = [];
 
   ngOnInit(): void {
-    const movieObservable = this.moviesService.getMovies();
-    movieObservable.subscribe((data) => {
+    const movieObservable$ = this.moviesService.getMovies();
+    movieObservable$.subscribe((data) => {
       console.log(data);
       this.movieList = data;
     });
