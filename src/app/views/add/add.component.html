@@ -12,6 +12,9 @@
           placeholder="Ex. Ilha do Medo"
           formControlName="title"
         />
+        <mat-error *ngIf="movieForm.controls.title.errors?.required">
+          Campo obrigatório
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Ano</mat-label>
@@ -21,6 +24,12 @@
           type="number"
           formControlName="year"
         />
+        <mat-error *ngIf="movieForm.controls.year.errors?.min">
+          Ano mínimo: 1800
+        </mat-error>
+        <mat-error *ngIf="movieForm.controls.year.errors?.max">
+          Ano máximo: {{ currentYear }}
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Diretor</mat-label>
@@ -29,6 +38,9 @@
           placeholder="Ex. Martin Scorsese"
           formControlName="director"
         />
+        <mat-error *ngIf="movieForm.controls.director.errors?.required">
+          Campo obrigatório
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Orçamento</mat-label>
@@ -37,6 +49,9 @@
           placeholder="Ex. Martin Scorsese"
           formControlName="shootingPrice"
         />
+        <mat-error *ngIf="movieForm.controls.shootingPrice.errors?.required">
+          Campo obrigatório
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-select
@@ -48,7 +63,13 @@
           <mat-option value="2">Não entendi nada</mat-option>
         </mat-select>
       </mat-form-field>
-      <button mat-flat-button color="accent" class="add-button" type="submit">
+      <button
+        mat-flat-button
+        color="accent"
+        class="add-button"
+        type="submit"
+        [disabled]="!movieForm.valid"
+      >
         Adicionar
       </button>
     </form>

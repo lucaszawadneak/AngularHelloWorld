@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { Movie } from "src/app/interfaces";
 import { MoviesService } from "src/app/services/movies.service";
 
@@ -16,19 +16,22 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public movieForm = this.form.group({
-    rating: [-1],
-    title: [""],
-    year: [0],
-    director: [""],
-    shootingPrice: [10000],
-  });
+  public readonly currentYear = new Date().getFullYear();
 
-  rating: number = -1;
-  title: string = "";
-  year: number = 2001;
-  director: string = "";
-  shootingPrice: number = 10000;
+  public movieForm = this.form.group({
+    rating: [-1, [Validators.required, Validators.min(0), Validators.max(2)]],
+    title: ["", [Validators.minLength(1), Validators.required]],
+    year: [
+      0,
+      [
+        Validators.required,
+        Validators.min(1800),
+        Validators.max(Number(this.currentYear)),
+      ],
+    ],
+    director: ["", Validators.required],
+    shootingPrice: [10000, Validators.required],
+  });
 
   clearState() {
     this.movieForm.setValue({
