@@ -4,14 +4,13 @@
     <h1>Adicionar filme</h1>
   </span>
   <div id="add-box">
-    <form>
+    <form [formGroup]="movieForm" (ngSubmit)="handleRegisterMovie()">
       <mat-form-field>
         <mat-label>Título</mat-label>
         <input
           matInput
           placeholder="Ex. Ilha do Medo"
-          [(ngModel)]="title"
-          name="title"
+          formControlName="title"
         />
       </mat-form-field>
       <mat-form-field>
@@ -20,8 +19,7 @@
           matInput
           placeholder="Ex. 2010"
           type="number"
-          [(ngModel)]="year"
-          name="year"
+          formControlName="year"
         />
       </mat-form-field>
       <mat-form-field>
@@ -29,8 +27,7 @@
         <input
           matInput
           placeholder="Ex. Martin Scorsese"
-          [(ngModel)]="director"
-          name="director"
+          formControlName="director"
         />
       </mat-form-field>
       <mat-form-field>
@@ -38,27 +35,20 @@
         <input
           matInput
           placeholder="Ex. Martin Scorsese"
-          [(ngModel)]="shootingPrice"
-          name="shootingPrice"
+          formControlName="shootingPrice"
         />
       </mat-form-field>
       <mat-form-field>
         <mat-select
           placeholder="Sua avaliação do filme!"
-          [(ngModel)]="rating"
-          name="rating"
+          formControlName="rating"
         >
           <mat-option value="0">Gostei</mat-option>
           <mat-option value="1">Odiei</mat-option>
           <mat-option value="2">Não entendi nada</mat-option>
         </mat-select>
       </mat-form-field>
-      <button
-        mat-flat-button
-        color="accent"
-        class="add-button"
-        (click)="handleRegisterMovie()"
-      >
+      <button mat-flat-button color="accent" class="add-button" type="submit">
         Adicionar
       </button>
     </form>
