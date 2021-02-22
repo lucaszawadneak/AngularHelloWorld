@@ -1,3 +1,4 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { Movie } from "../interfaces";
@@ -5,7 +6,10 @@ import { Movie } from "../interfaces";
   providedIn: "root",
 })
 export class MoviesService {
-  constructor() {}
+  private readonly url: string =
+    "https://angular-crud-3614c-default-rtdb.firebaseio.com/movies.json";
+
+  constructor(private http: HttpClient) {}
 
   public movies: Movie[] = [
     {
@@ -22,12 +26,22 @@ export class MoviesService {
     this.movies
   );
 
+  getMoviesFromServer(): Observable<Movie[]> {
+    return this.http.get<Movie[]>(this.url);
+  }
+
+  postMovieToServer(data: Movie): Observable<Movie[]> {
+    console.log("POST");
+    return this.http.post<Movie[]>(this.url, data);
+  }
+
   getMovies(): Observable<Movie[]> {
     return this.movieWatcher.asObservable();
   }
 
   pushMovie(data: Movie): void {
     this.movies.push(data);
+    this.postMovieToServer(data).subscribe((e) => console.log(e));
     this.movieWatcher.next(this.movies);
   }
 
