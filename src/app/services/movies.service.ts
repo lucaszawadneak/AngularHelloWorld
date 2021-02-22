@@ -7,7 +7,7 @@ import { Movie } from "../interfaces";
 })
 export class MoviesService {
   private readonly url: string =
-    "https://angular-crud-3614c-default-rtdb.firebaseio.com/movies.json";
+    "https://angular-crud-3614c-default-rtdb.firebaseio.com/";
 
   constructor(private http: HttpClient) {}
 
@@ -26,13 +26,22 @@ export class MoviesService {
     this.movies
   );
 
-  getMoviesFromServer(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.url);
+  getMoviesFromServer(): Observable<any> {
+    return this.http.get<any>(`${this.url}/movies.json`);
   }
 
-  postMovieToServer(data: Movie): Observable<Movie[]> {
+  handleAssignMovies(): void {
+    console.log("assign");
+    this.getMoviesFromServer().subscribe((data) => {
+      let returnArray = [];
+      Object.keys(data).map((i) => returnArray.push(data[i]));
+      this.movieWatcher.next(returnArray);
+    });
+  }
+
+  putMovieToServer(data: Movie): Observable<Movie[]> {
     console.log("POST");
-    return this.http.post<Movie[]>(this.url, data);
+    return this.http.put<Movie[]>(`${this.url}/movies/${data.id}.json`, data);
   }
 
   getMovies(): Observable<Movie[]> {
@@ -41,7 +50,7 @@ export class MoviesService {
 
   pushMovie(data: Movie): void {
     this.movies.push(data);
-    this.postMovieToServer(data).subscribe((e) => console.log(e));
+    this.putMovieToServer(data).subscribe((e) => console.log(e));
     this.movieWatcher.next(this.movies);
   }
 
