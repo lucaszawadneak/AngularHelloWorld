@@ -11,16 +11,7 @@ export class MoviesService {
 
   constructor(private http: HttpClient) {}
 
-  public movies: Movie[] = [
-    {
-      title: "Star Wars",
-      year: 1977,
-      director: "George Lucas",
-      id: 0,
-      rating: 1,
-      shootingPrice: 300000,
-    },
-  ];
+  public movies: Movie[] = [];
 
   public movieWatcher: BehaviorSubject<Movie[]> = new BehaviorSubject(
     this.movies
@@ -31,16 +22,14 @@ export class MoviesService {
   }
 
   handleAssignMovies(): void {
-    console.log("assign");
     this.getMoviesFromServer().subscribe((data) => {
       let returnArray = [];
       Object.keys(data).map((i) => returnArray.push(data[i]));
-      this.movieWatcher.next(returnArray);
+      this.setMovies(returnArray);
     });
   }
 
   putMovieToServer(data: Movie): Observable<Movie[]> {
-    console.log("POST");
     return this.http.put<Movie[]>(`${this.url}/movies/${data.id}.json`, data);
   }
 
@@ -48,19 +37,24 @@ export class MoviesService {
     return this.movieWatcher.asObservable();
   }
 
-  pushMovie(data: Movie): void {
-    this.movies.push(data);
-    this.putMovieToServer(data).subscribe((e) => console.log(e));
+  setMovies(data: Movie[]): void {
+    this.movies = data;
     this.movieWatcher.next(this.movies);
+  }
+
+  pushMovie(data: Movie): void {
+    this.putMovieToServer(data).subscribe(()=>console.log('Success!'));
+    this.setMovies([...this.movies, data]);
   }
 
   deleteMovie(index: number): void {
     this.movies.splice(index, 1);
-    this.movieWatcher.next(this.movies);
+    this.setMovies(this.movies);
   }
 
   editMovie(index: number, data: Movie): void {
-    console.log("Edit");
+    this.putMovieToServer(data).subscribe((event) => console.log(event));
     this.movies[index] = data;
+    this.setMovies(this.movies);
   }
 }
