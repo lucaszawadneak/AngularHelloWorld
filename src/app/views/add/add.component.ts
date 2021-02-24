@@ -22,7 +22,7 @@ export class AddComponent implements OnInit {
     rating: [-1, [Validators.required, Validators.min(0), Validators.max(2)]],
     title: ["", [Validators.minLength(1), Validators.required]],
     year: [
-      0,
+      "",
       [
         Validators.required,
         Validators.min(1800),
@@ -30,7 +30,7 @@ export class AddComponent implements OnInit {
       ],
     ],
     director: ["", Validators.required],
-    shootingPrice: [10000, Validators.required],
+    shootingPrice: ["", [Validators.required,Validators.min(0)]],
   });
 
   clearState() {

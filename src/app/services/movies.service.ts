@@ -1,15 +1,18 @@
 import { HttpClient } from "@angular/common/http";
+import { ToastrService } from 'ngx-toastr';
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { Movie } from "../interfaces";
+
 @Injectable({
   providedIn: "root",
 })
+
 export class MoviesService {
   private readonly url: string =
     "https://angular-crud-3614c-default-rtdb.firebaseio.com/";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private toastr: ToastrService) {}
 
   public movies: Movie[] = [];
 
@@ -33,6 +36,10 @@ export class MoviesService {
     return this.http.put<Movie[]>(`${this.url}/movies/${data.id}.json`, data);
   }
 
+  deleteMovieFromServer(id:number): Observable<any> {
+    return this.http.delete<Movie[]>(`${this.url}/movies/${id}.json`);
+  }
+
   getMovies(): Observable<Movie[]> {
     return this.movieWatcher.asObservable();
   }
@@ -45,9 +52,12 @@ export class MoviesService {
   pushMovie(data: Movie): void {
     this.putMovieToServer(data).subscribe(()=>console.log('Success!'));
     this.setMovies([...this.movies, data]);
+    this.toastr.success(data.title, 'Filme adicionado!');
   }
 
   deleteMovie(index: number): void {
+    let movieID = this.movies[index].id;
+    this.deleteMovieFromServer(movieID).subscribe();
     this.movies.splice(index, 1);
     this.setMovies(this.movies);
   }
@@ -56,5 +66,6 @@ export class MoviesService {
     this.putMovieToServer(data).subscribe((event) => console.log(event));
     this.movies[index] = data;
     this.setMovies(this.movies);
+    this.toastr.success(data.title, 'Filme editado!');
   }
 }

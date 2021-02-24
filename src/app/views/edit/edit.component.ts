@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import { EditObject, Movie } from "src/app/interfaces";
+import { Component, OnInit } from "@angular/core";
+import { Movie } from "src/app/interfaces";
 import { MoviesService } from "src/app/services/movies.service";
 
 @Component({
@@ -26,9 +25,6 @@ export class EditComponent implements OnInit {
     movieObservable$.subscribe((data) => {
       this.movieList = data;
     });
-    if (this.selectedMovie) {
-      // this.handleAssingValues();
-    }
   }
 
   handleSelectMovie(event): void {
